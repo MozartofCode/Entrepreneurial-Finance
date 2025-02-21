@@ -12,12 +12,10 @@ function App() {
         <Routes>
           <Route path="/" element={<BalanceSheet />} />
           
-          {/ Financial statement input routes /}
           <Route path="/income-statement" element={<IncomeStatement />} />
           <Route path="/cash-flow" element={<CashFlow />} />
           <Route path="/financial-ratios" element={<FinancialRatios />} />
 
-          {/ Catch all undefined routes and redirect to balance sheet /}
           <Route path="" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
