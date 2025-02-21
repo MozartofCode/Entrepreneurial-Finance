@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
+import { useState } from "react";
 
-function MainComponent() {
+function FinancialRatio() {
   const [ratios, setRatios] = useState({
     currentRatio: 2.5,
     quickRatio: 1.8,
@@ -119,4 +120,4 @@ function MainComponent() {
   );
 }
 
-export default MainComponent;
+export default FinancialRatio;

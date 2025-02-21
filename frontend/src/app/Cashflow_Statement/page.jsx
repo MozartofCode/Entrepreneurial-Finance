@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
+import { useState } from "react";
 
-function MainComponent() {
+function Cashflow() {
   const [formData, setFormData] = useState({
     operatingActivities: {
       cashFromOperations: "",
@@ -217,4 +218,4 @@ function MainComponent() {
   );
 }
 
-export default MainComponent;
+export default Cashflow;

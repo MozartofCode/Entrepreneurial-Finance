@@ -1,7 +1,9 @@
 "use client";
 import React from "react";
+import { useState } from "react";
 
-function MainComponent() {
+
+function BalanceSheet() {
   const [formData, setFormData] = useState({
     cash: "",
     accountsReceivable: "",
@@ -209,4 +211,4 @@ function MainComponent() {
   );
 }
 
-export default MainComponent;
+export default BalanceSheet;
