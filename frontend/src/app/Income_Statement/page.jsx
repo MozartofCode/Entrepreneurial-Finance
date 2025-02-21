@@ -24,7 +24,7 @@ function IncomeStatement() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/income-statement", {
+      const response = await fetch("/store_income_statement", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

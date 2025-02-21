@@ -37,7 +37,7 @@ function Cashflow() {
     setError(null);
 
     try {
-      const response = await fetch("/api/cash-flow", {
+      const response = await fetch("/store_cashflow_statement", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -29,7 +29,7 @@ function BalanceSheet() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/balance-sheet", {
+      const response = await fetch("/store_balance_sheet", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
