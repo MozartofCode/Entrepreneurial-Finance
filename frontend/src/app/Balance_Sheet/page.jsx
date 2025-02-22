@@ -1,23 +1,24 @@
 "use client";
-import React from "react";
-import { useState } from "react";
-
+import React, { useState } from "react";
 
 function BalanceSheet() {
   const [formData, setFormData] = useState({
-    
     companyName: "",
     year: "",
-    
+
+    // Assets
     cashAndMarketableSecurities: "",
     receivables: "",
     inventories: "",
+    prepaidExpenses: "",
+    otherCurrentAssets: "",
     grossEquipment: "",
     accumulatedDepreciation: "",
     netEquipment: "",
     otherLongTermAssets: "",
     totalAssets: "",
 
+    // Liabilities
     payables: "",
     accruedWages: "",
     bankLoans: "",
@@ -25,7 +26,17 @@ function BalanceSheet() {
     totalCurrentLiabilities: "",
     longTermDebt: "",
     capitalLeases: "",
+    deferredTaxLiabilities: "",
+    pensionLiabilities: "",
+    otherLongTermLiabilities: "",
     totalLongTermLiabilities: "",
+    totalLiabilities: "",
+
+    // Equity
+    commonStock: "",
+    additionalPaidInCapital: "",
+    retainedEarnings: "",
+    treasuryStock: "",
     ownersequity: "",
     totalLiabilitiesAndEquity: "",
   });
@@ -79,138 +90,132 @@ function BalanceSheet() {
           onSubmit={handleSubmit}
           className="space-y-8 bg-white p-6 rounded-lg shadow"
         >
+          {/* Company Information */}
+          <div className="space-y-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Company Name
+            </label>
+            <input
+              type="text"
+              name="companyName"
+              value={formData.companyName}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+
+            <label className="block text-sm font-medium text-gray-700">
+              Year
+            </label>
+            <input
+              type="number"
+              name="year"
+              value={formData.year}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Assets Section */}
           <div className="space-y-6">
             <h2 className="text-xl font-semibold text-gray-900 font-roboto">
               Assets
             </h2>
             <div className="grid grid-cols-1 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Cash and Equivalents
-                </label>
-                <input
-                  type="number"
-                  name="cash"
-                  value={formData.cash}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Accounts Receivable
-                </label>
-                <input
-                  type="number"
-                  name="accountsReceivable"
-                  value={formData.accountsReceivable}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Inventory
-                </label>
-                <input
-                  type="number"
-                  name="inventory"
-                  value={formData.inventory}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Fixed Assets
-                </label>
-                <input
-                  type="number"
-                  name="fixedAssets"
-                  value={formData.fixedAssets}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
+              {[
+                "cashAndMarketableSecurities",
+                "receivables",
+                "inventories",
+                "prepaidExpenses",
+                "otherCurrentAssets",
+                "grossEquipment",
+                "accumulatedDepreciation",
+                "netEquipment",
+                "otherLongTermAssets",
+                "totalAssets",
+              ].map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-700">
+                    {field.replace(/([A-Z])/g, " $1").trim()}
+                  </label>
+                  <input
+                    type="number"
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
+          {/* Liabilities Section */}
           <div className="space-y-6">
             <h2 className="text-xl font-semibold text-gray-900 font-roboto">
               Liabilities
             </h2>
             <div className="grid grid-cols-1 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Accounts Payable
-                </label>
-                <input
-                  type="number"
-                  name="accountsPayable"
-                  value={formData.accountsPayable}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Short-term Debt
-                </label>
-                <input
-                  type="number"
-                  name="shortTermDebt"
-                  value={formData.shortTermDebt}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Long-term Debt
-                </label>
-                <input
-                  type="number"
-                  name="longTermDebt"
-                  value={formData.longTermDebt}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
+              {[
+                "payables",
+                "accruedWages",
+                "bankLoans",
+                "otherCurrentLiabilities",
+                "totalCurrentLiabilities",
+                "longTermDebt",
+                "capitalLeases",
+                "deferredTaxLiabilities",
+                "pensionLiabilities",
+                "otherLongTermLiabilities",
+                "totalLongTermLiabilities",
+                "totalLiabilities",
+              ].map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-700">
+                    {field.replace(/([A-Z])/g, " $1").trim()}
+                  </label>
+                  <input
+                    type="number"
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
+          {/* Equity Section */}
           <div className="space-y-6">
             <h2 className="text-xl font-semibold text-gray-900 font-roboto">
               Equity
             </h2>
             <div className="grid grid-cols-1 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Common Stock
-                </label>
-                <input
-                  type="number"
-                  name="commonStock"
-                  value={formData.commonStock}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Retained Earnings
-                </label>
-                <input
-                  type="number"
-                  name="retainedEarnings"
-                  value={formData.retainedEarnings}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
+              {[
+                "commonStock",
+                "additionalPaidInCapital",
+                "retainedEarnings",
+                "treasuryStock",
+                "ownersequity",
+                "totalLiabilitiesAndEquity",
+              ].map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-700">
+                    {field.replace(/([A-Z])/g, " $1").trim()}
+                  </label>
+                  <input
+                    type="number"
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
+          {/* Submit Button */}
           <div className="flex justify-end">
             <button
               type="submit"

@@ -1,25 +1,31 @@
 "use client";
-import React from "react";
-import { useState } from "react";
-
+import React, { useState } from "react";
 
 function IncomeStatement() {
   const [formData, setFormData] = useState({
-    
     companyName: "",
     year: "",
-    
-    netSales: "",
+
+    // Revenue
+    salesRevenue: "",
+    otherRevenue: "",
+    totalRevenue: "",
+
+    // Expenses
     costOfGoodsSold: "",
-    grossEarnings: "",
+    salariesAndWages: "",
     marketingExpenses: "",
     administrativeExpenses: "",
+    researchAndDevelopment: "",
     buildingRental: "",
     depreciationExpense: "",
+    interestExpense: "",
+    taxExpense: "",
+
+    // Calculated Fields
+    grossEarnings: "",
     EBIT: "",
-    interest: "",
     earningsBeforeTaxes: "",
-    taxes: "",
     netIncome: "",
   });
 
@@ -63,138 +69,122 @@ function IncomeStatement() {
           onSubmit={handleSubmit}
           className="bg-white shadow-md rounded-lg p-8 space-y-8"
         >
+          {/* Company Info */}
+          <div className="space-y-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Company Name
+            </label>
+            <input
+              type="text"
+              name="companyName"
+              value={formData.companyName}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+
+            <label className="block text-sm font-medium text-gray-700">
+              Year
+            </label>
+            <input
+              type="number"
+              name="year"
+              value={formData.year}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
+
+          {/* Revenue Section */}
           <div className="space-y-6">
             <h2 className="text-xl font-semibold text-gray-800 font-roboto">
               Revenue
             </h2>
-            <div className="space-y-4">
-              <div>
-                <label
-                  htmlFor="salesRevenue"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Sales Revenue
-                </label>
-                <input
-                  type="number"
-                  name="salesRevenue"
-                  id="salesRevenue"
-                  value={formData.salesRevenue}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Enter sales revenue"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="otherRevenue"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Other Revenue
-                </label>
-                <input
-                  type="number"
-                  name="otherRevenue"
-                  id="otherRevenue"
-                  value={formData.otherRevenue}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Enter other revenue"
-                  required
-                />
-              </div>
+            <div className="grid gap-4">
+              {["salesRevenue", "otherRevenue", "totalRevenue"].map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-700">
+                    {field.replace(/([A-Z])/g, " $1").trim()}
+                  </label>
+                  <input
+                    type="number"
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
+          {/* Expenses Section */}
           <div className="space-y-6">
             <h2 className="text-xl font-semibold text-gray-800 font-roboto">
               Expenses
             </h2>
-            <div className="space-y-4">
-              <div>
-                <label
-                  htmlFor="costOfGoodsSold"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Cost of Goods Sold
-                </label>
-                <input
-                  type="number"
-                  name="costOfGoodsSold"
-                  id="costOfGoodsSold"
-                  value={formData.costOfGoodsSold}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Enter cost of goods sold"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="operatingExpenses"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Operating Expenses
-                </label>
-                <input
-                  type="number"
-                  name="operatingExpenses"
-                  id="operatingExpenses"
-                  value={formData.operatingExpenses}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Enter operating expenses"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="interestExpense"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Interest Expense
-                </label>
-                <input
-                  type="number"
-                  name="interestExpense"
-                  id="interestExpense"
-                  value={formData.interestExpense}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Enter interest expense"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="taxExpense"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Tax Expense
-                </label>
-                <input
-                  type="number"
-                  name="taxExpense"
-                  id="taxExpense"
-                  value={formData.taxExpense}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Enter tax expense"
-                  required
-                />
-              </div>
+            <div className="grid gap-4">
+              {[
+                "costOfGoodsSold",
+                "salariesAndWages",
+                "marketingExpenses",
+                "administrativeExpenses",
+                "researchAndDevelopment",
+                "buildingRental",
+                "depreciationExpense",
+                "interestExpense",
+                "taxExpense",
+              ].map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-700">
+                    {field.replace(/([A-Z])/g, " $1").trim()}
+                  </label>
+                  <input
+                    type="number"
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="pt-4">
-            <button
-              type="submit"
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              Submit and Continue to Cash Flow
-            </button>
+          {/* Calculations Section */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold text-gray-800 font-roboto">
+              Net Earnings
+            </h2>
+            <div className="grid gap-4">
+              {["grossEarnings", "EBIT", "earningsBeforeTaxes", "netIncome"].map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-700">
+                    {field.replace(/([A-Z])/g, " $1").trim()}
+                  </label>
+                  <input
+                    type="number"
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  />
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Submit and Continue to Cash Flow
+          </button>
         </form>
       </div>
     </div>

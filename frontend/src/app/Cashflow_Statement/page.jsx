@@ -1,10 +1,8 @@
 "use client";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 function Cashflow() {
   const [formData, setFormData] = useState({
-
     companyName: "",
     year: "",
 
@@ -17,18 +15,22 @@ function Cashflow() {
       increaseInAccruedWages: "",
       netCashflowFromOperations: "",
     },
-    
+
     cashflowFromInvestingActivities: {
       increaseInGrossEquipment: "",
+      proceedsFromSalesOfAssets: "",
+      purchaseOfInvestments: "",
     },
 
     cashflowFromFinancingActivities: {
+      issuanceOfDebt: "",
+      repaymentOfDebt: "",
       increaseInOtherShortTermLiabilities: "",
+      dividendsPaid: "",
       netChangeExcludingCashAccounts: "",
       beginningCash: "",
       endingCash: "",
     },
-
   });
 
   const [error, setError] = useState(null);
@@ -78,146 +80,113 @@ function Cashflow() {
           Cash Flow Statement
         </h1>
 
+        {error && <div className="text-red-600 text-sm">{error}</div>}
+
         <form
           onSubmit={handleSubmit}
           className="space-y-8 bg-white p-6 rounded-lg shadow"
         >
+          {/* Company Information */}
+          <div className="space-y-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Company Name
+            </label>
+            <input
+              type="text"
+              name="companyName"
+              value={formData.companyName}
+              onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
+              className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+            />
+
+            <label className="block text-sm font-medium text-gray-700">
+              Year
+            </label>
+            <input
+              type="number"
+              name="year"
+              value={formData.year}
+              onChange={(e) => setFormData({ ...formData, year: e.target.value })}
+              className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+          {/* Operating Activities */}
           <div className="space-y-6">
-            <div>
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 font-roboto">
-                Operating Activities
-              </h2>
-              <div className="grid gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Cash from Operations
+            <h2 className="text-xl font-semibold text-gray-800 mb-4 font-roboto">
+              Operating Activities
+            </h2>
+            <div className="grid gap-4">
+              {Object.keys(formData.cashflowFromOperations).map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-700">
+                    {field.replace(/([A-Z])/g, " $1").trim()}
                   </label>
                   <input
                     type="number"
-                    name="cashFromOperations"
-                    value={formData.operatingActivities.cashFromOperations}
+                    name={field}
+                    value={formData.cashflowFromOperations[field]}
                     onChange={(e) =>
-                      handleInputChange(
-                        "operatingActivities",
-                        "cashFromOperations",
-                        e.target.value
-                      )
+                      handleInputChange("cashflowFromOperations", field, e.target.value)
                     }
                     className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Changes in Working Capital
-                  </label>
-                  <input
-                    type="number"
-                    name="workingCapitalChanges"
-                    value={formData.operatingActivities.workingCapitalChanges}
-                    onChange={(e) =>
-                      handleInputChange(
-                        "operatingActivities",
-                        "workingCapitalChanges",
-                        e.target.value
-                      )
-                    }
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 font-roboto">
-                Investing Activities
-              </h2>
-              <div className="grid gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Capital Expenditures
-                  </label>
-                  <input
-                    type="number"
-                    name="capitalExpenditures"
-                    value={formData.investingActivities.capitalExpenditures}
-                    onChange={(e) =>
-                      handleInputChange(
-                        "investingActivities",
-                        "capitalExpenditures",
-                        e.target.value
-                      )
-                    }
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Investment Purchases/Sales
-                  </label>
-                  <input
-                    type="number"
-                    name="investmentActivity"
-                    value={formData.investingActivities.investmentActivity}
-                    onChange={(e) =>
-                      handleInputChange(
-                        "investingActivities",
-                        "investmentActivity",
-                        e.target.value
-                      )
-                    }
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 font-roboto">
-                Financing Activities
-              </h2>
-              <div className="grid gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Debt Issuance/Repayment
-                  </label>
-                  <input
-                    type="number"
-                    name="debtActivity"
-                    value={formData.financingActivities.debtActivity}
-                    onChange={(e) =>
-                      handleInputChange(
-                        "financingActivities",
-                        "debtActivity",
-                        e.target.value
-                      )
-                    }
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Equity Issuance/Repurchases
-                  </label>
-                  <input
-                    type="number"
-                    name="equityActivity"
-                    value={formData.financingActivities.equityActivity}
-                    onChange={(e) =>
-                      handleInputChange(
-                        "financingActivities",
-                        "equityActivity",
-                        e.target.value
-                      )
-                    }
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {error && <div className="text-red-600 text-sm">{error}</div>}
+          {/* Investing Activities */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4 font-roboto">
+              Investing Activities
+            </h2>
+            <div className="grid gap-4">
+              {Object.keys(formData.cashflowFromInvestingActivities).map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-700">
+                    {field.replace(/([A-Z])/g, " $1").trim()}
+                  </label>
+                  <input
+                    type="number"
+                    name={field}
+                    value={formData.cashflowFromInvestingActivities[field]}
+                    onChange={(e) =>
+                      handleInputChange("cashflowFromInvestingActivities", field, e.target.value)
+                    }
+                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
 
+          {/* Financing Activities */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4 font-roboto">
+              Financing Activities
+            </h2>
+            <div className="grid gap-4">
+              {Object.keys(formData.cashflowFromFinancingActivities).map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-700">
+                    {field.replace(/([A-Z])/g, " $1").trim()}
+                  </label>
+                  <input
+                    type="number"
+                    name={field}
+                    value={formData.cashflowFromFinancingActivities[field]}
+                    onChange={(e) =>
+                      handleInputChange("cashflowFromFinancingActivities", field, e.target.value)
+                    }
+                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
