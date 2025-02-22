@@ -3,19 +3,39 @@ import React from "react";
 import { useState } from "react";
 
 function FinancialRatio() {
+
   const [ratios, setRatios] = useState({
-    currentRatio: 2.5,
-    quickRatio: 1.8,
-    grossMargin: 0.45,
-    operatingMargin: 0.25,
-    netProfitMargin: 0.18,
-    roa: 0.12,
-    roe: 0.15,
-    assetTurnover: 1.2,
-    inventoryTurnover: 6.5,
-    debtToEquity: 0.8,
-    timesInterestEarned: 8.4,
+ 
+    // Liquidity Ratios
+    currentRatio: "",          
+    quickRatio: "",            
+    NWCToTA: "",               
+  
+    // Leverage Ratios
+    TDToTA: "",                
+    equityMultiplier: "",       
+    debtToEquity: "",          
+    currentLiabilitiesToTD: "", 
+    interestCoverage: "",       
+    fixedChargeCoverage: "",    
+  
+    // Profitability & Efficiency Ratios
+    NOPATMargin: "",            
+    salesToTA: "",              
+    operatingReturnOnAssets: "", 
+    ROA: "",                    
+    ROE: "",                    
+  
+    // Breakeven & Cash Flow Metrics
+    survivalRevenues: "",      
+    cashBurn: "",              
+    cashBurnRate: "",          
+    cashBuild: "",             
+    cashBuildRate: "",         
+    netCashBurn: "",           
+    netCashBurnRate: "",       
   });
+  
 
   const RatioCard = ({ title, value, description }) => (
     <div className="bg-white p-6 rounded-lg shadow-md">
@@ -60,59 +80,109 @@ function FinancialRatio() {
             value={ratios.quickRatio}
             description="Measures ability to pay short-term obligations without selling inventory"
           />
+          <RatioCard
+            title="NWC to TA"
+            value={ratios.NWCToTA}
+            description="Measures the net working capital to total assets"
+          />
         </RatioSection>
 
-        <RatioSection title="Profitability Ratios">
+        <RatioSection title="Profitability & Efficiency Ratios">
           <RatioCard
-            title="Gross Margin"
-            value={ratios.grossMargin}
-            description="Percentage of revenue retained after cost of goods sold"
+            title="NOPAT Margin"
+            value={ratios.NOPATMargin}
+            description="Net operating profit after tax margin"
           />
           <RatioCard
-            title="Operating Margin"
-            value={ratios.operatingMargin}
-            description="Percentage of revenue retained after operating expenses"
+            title="Sales to TA"
+            value={ratios.salesToTA}
+            description="Sales to total assets ratio"
           />
           <RatioCard
-            title="Net Profit Margin"
-            value={ratios.netProfitMargin}
-            description="Percentage of revenue retained after all expenses"
+            title="Operating Return on Assets"
+            value={ratios.operatingReturnOnAssets}
+            description="Operating income to total assets ratio"
           />
           <RatioCard
             title="Return on Assets (ROA)"
-            value={ratios.roa}
+            value={ratios.ROA}
             description="How efficiently assets are used to generate profit"
           />
           <RatioCard
             title="Return on Equity (ROE)"
-            value={ratios.roe}
+            value={ratios.ROE}
             description="How efficiently shareholder equity is used to generate profit"
-          />
-        </RatioSection>
-
-        <RatioSection title="Efficiency Ratios">
-          <RatioCard
-            title="Asset Turnover"
-            value={ratios.assetTurnover}
-            description="How efficiently assets are used to generate revenue"
-          />
-          <RatioCard
-            title="Inventory Turnover"
-            value={ratios.inventoryTurnover}
-            description="How many times inventory is sold and replaced"
           />
         </RatioSection>
 
         <RatioSection title="Leverage Ratios">
           <RatioCard
-            title="Debt to Equity"
-            value={ratios.debtToEquity}
-            description="Proportion of debt to equity used to finance assets"
+            title="Total Debt to Total Assets"
+            value={ratios.TDToTA}
+            description="Proportion of assets financed by debt"
           />
           <RatioCard
-            title="Times Interest Earned"
-            value={ratios.timesInterestEarned}
-            description="Ability to meet interest payments on debt"
+            title="Equity Multiplier"
+            value={ratios.equityMultiplier}
+            description="Measures the financial leverage of the company"
+          />
+          <RatioCard
+            title="Debt to Equity"
+            value={ratios.debtToEquity}
+            description="Measures the proportion of debt to equity"
+          />
+          <RatioCard
+            title="Current Liabilities to Total Debt"
+            value={ratios.currentLiabilitiesToTD}
+            description="Measures the proportion of current liabilities to total debt"
+          />
+          <RatioCard
+            title="Interest Coverage"
+            value={ratios.interestCoverage}
+            description="Measures the company's ability to pay interest on outstanding debt"
+          />
+          <RatioCard
+            title="Fixed Charge Coverage"
+            value={ratios.fixedChargeCoverage}
+            description="Measures the company's ability to pay fixed charges"
+          />
+        </RatioSection>
+
+        <RatioSection title="Breakeven & Cash Flow Metrics">
+          <RatioCard
+            title="Survival Revenues"
+            value={ratios.survivalRevenues}
+            description="Minimum revenue required to cover all expenses"
+          />
+          <RatioCard
+            title="Cash Burn"
+            value={ratios.cashBurn}
+            description="Rate at which a company is using up its cash reserves"
+          />
+          <RatioCard
+            title="Cash Burn Rate"
+            value={ratios.cashBurnRate}
+            description="Rate at which a company is using up its cash reserves"
+          />
+          <RatioCard
+            title="Cash Build"
+            value={ratios.cashBuild}
+            description="Rate at which a company is building up its cash reserves"
+          />
+          <RatioCard
+            title="Cash Build Rate"
+            value={ratios.cashBuildRate}
+            description="Rate at which a company is building up its cash reserves"
+          />
+          <RatioCard
+            title="Net Cash Burn"
+            value={ratios.netCashBurn}
+            description="Rate at which a company is using up its cash reserves"
+          />
+          <RatioCard
+            title="Net Cash Burn Rate"
+            value={ratios.netCashBurnRate}
+            description="Rate at which a company is using up its cash reserves"
           />
         </RatioSection>
       </div>

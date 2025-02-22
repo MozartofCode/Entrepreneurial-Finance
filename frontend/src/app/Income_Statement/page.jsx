@@ -7,25 +7,19 @@ function IncomeStatement() {
     year: "",
 
     // Revenue
-    salesRevenue: "",
-    otherRevenue: "",
-    totalRevenue: "",
+    revenue: "",
 
     // Expenses
     costOfGoodsSold: "",
-    salariesAndWages: "",
+    grossProfit: "",
     marketingExpenses: "",
     administrativeExpenses: "",
-    researchAndDevelopment: "",
-    buildingRental: "",
-    depreciationExpense: "",
-    interestExpense: "",
-    taxExpense: "",
-
-    // Calculated Fields
-    grossEarnings: "",
+    EBITDA: "",
+    depreciation: "",
     EBIT: "",
-    earningsBeforeTaxes: "",
+    interest: "",
+    EBT: "",
+    taxes: "",
     netIncome: "",
   });
 
@@ -40,7 +34,7 @@ function IncomeStatement() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/store_income_statement", {
+      const response = await fetch("http://127.0.0.1:5000/store_income_statement", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +46,7 @@ function IncomeStatement() {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
 
-      window.location.href = "/cash-flow";
+      window.location.href = "/Cashflow_Statement";
     } catch (error) {
       console.error("Failed to submit form:", error);
     }
@@ -102,7 +96,7 @@ function IncomeStatement() {
               Revenue
             </h2>
             <div className="grid gap-4">
-              {["salesRevenue", "otherRevenue", "totalRevenue"].map((field) => (
+              {["salesRevenue"].map((field) => (
                 <div key={field}>
                   <label className="block text-sm font-medium text-gray-700">
                     {field.replace(/([A-Z])/g, " $1").trim()}
@@ -126,41 +120,20 @@ function IncomeStatement() {
               Expenses
             </h2>
             <div className="grid gap-4">
+
               {[
                 "costOfGoodsSold",
-                "salariesAndWages",
+                "grossProfit",
                 "marketingExpenses",
                 "administrativeExpenses",
-                "researchAndDevelopment",
-                "buildingRental",
-                "depreciationExpense",
-                "interestExpense",
-                "taxExpense",
+                "EBITDA",
+                "depreciation",
+                "EBIT",
+                "interest",
+                "EBT",
+                "taxes",
+                "netIncome",
               ].map((field) => (
-                <div key={field}>
-                  <label className="block text-sm font-medium text-gray-700">
-                    {field.replace(/([A-Z])/g, " $1").trim()}
-                  </label>
-                  <input
-                    type="number"
-                    name={field}
-                    value={formData[field]}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
-                    required
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Calculations Section */}
-          <div className="space-y-6">
-            <h2 className="text-xl font-semibold text-gray-800 font-roboto">
-              Net Earnings
-            </h2>
-            <div className="grid gap-4">
-              {["grossEarnings", "EBIT", "earningsBeforeTaxes", "netIncome"].map((field) => (
                 <div key={field}>
                   <label className="block text-sm font-medium text-gray-700">
                     {field.replace(/([A-Z])/g, " $1").trim()}

@@ -17,16 +17,11 @@ function Cashflow() {
     },
 
     cashflowFromInvestingActivities: {
-      increaseInGrossEquipment: "",
-      proceedsFromSalesOfAssets: "",
-      purchaseOfInvestments: "",
+      increaseInGrossEquipment: "",    
     },
 
     cashflowFromFinancingActivities: {
-      issuanceOfDebt: "",
-      repaymentOfDebt: "",
       increaseInOtherShortTermLiabilities: "",
-      dividendsPaid: "",
       netChangeExcludingCashAccounts: "",
       beginningCash: "",
       endingCash: "",
@@ -52,7 +47,7 @@ function Cashflow() {
     setError(null);
 
     try {
-      const response = await fetch("/store_cashflow_statement", {
+      const response = await fetch("http://127.0.0.1:5000/store_cashflow_statement", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +59,7 @@ function Cashflow() {
         throw new Error(`Error: ${response.status}`);
       }
 
-      window.location.href = "/financial-ratios";
+      window.location.href = "/Financial_Ratios";
     } catch (err) {
       console.error(err);
       setError("Failed to save data. Please try again.");

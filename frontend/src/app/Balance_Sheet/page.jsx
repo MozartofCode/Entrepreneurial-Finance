@@ -10,8 +10,7 @@ function BalanceSheet() {
     cashAndMarketableSecurities: "",
     receivables: "",
     inventories: "",
-    prepaidExpenses: "",
-    otherCurrentAssets: "",
+    totalCurrentAssets: "",
     grossEquipment: "",
     accumulatedDepreciation: "",
     netEquipment: "",
@@ -25,18 +24,8 @@ function BalanceSheet() {
     otherCurrentLiabilities: "",
     totalCurrentLiabilities: "",
     longTermDebt: "",
-    capitalLeases: "",
-    deferredTaxLiabilities: "",
-    pensionLiabilities: "",
-    otherLongTermLiabilities: "",
-    totalLongTermLiabilities: "",
-    totalLiabilities: "",
-
+ 
     // Equity
-    commonStock: "",
-    additionalPaidInCapital: "",
-    retainedEarnings: "",
-    treasuryStock: "",
     ownersequity: "",
     totalLiabilitiesAndEquity: "",
   });
@@ -129,8 +118,7 @@ function BalanceSheet() {
                 "cashAndMarketableSecurities",
                 "receivables",
                 "inventories",
-                "prepaidExpenses",
-                "otherCurrentAssets",
+                "totalCurrentAssets",
                 "grossEquipment",
                 "accumulatedDepreciation",
                 "netEquipment",
@@ -159,6 +147,7 @@ function BalanceSheet() {
               Liabilities
             </h2>
             <div className="grid grid-cols-1 gap-4">
+              
               {[
                 "payables",
                 "accruedWages",
@@ -166,12 +155,6 @@ function BalanceSheet() {
                 "otherCurrentLiabilities",
                 "totalCurrentLiabilities",
                 "longTermDebt",
-                "capitalLeases",
-                "deferredTaxLiabilities",
-                "pensionLiabilities",
-                "otherLongTermLiabilities",
-                "totalLongTermLiabilities",
-                "totalLiabilities",
               ].map((field) => (
                 <div key={field}>
                   <label className="block text-sm font-medium text-gray-700">
@@ -196,10 +179,6 @@ function BalanceSheet() {
             </h2>
             <div className="grid grid-cols-1 gap-4">
               {[
-                "commonStock",
-                "additionalPaidInCapital",
-                "retainedEarnings",
-                "treasuryStock",
                 "ownersequity",
                 "totalLiabilitiesAndEquity",
               ].map((field) => (
