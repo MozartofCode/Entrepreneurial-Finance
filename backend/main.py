@@ -7,8 +7,12 @@
 import os
 import json
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins
+
 
 DATA_FOLDER = "../data"
 os.makedirs(DATA_FOLDER, exist_ok=True)
@@ -19,6 +23,7 @@ def save_data(data, filename):
         file_path = os.path.join(DATA_FOLDER, filename)
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
+            print(f"Saving data to: {file_path}")  # Debugging line
         return True
     except Exception as e:
         return str(e)
@@ -26,6 +31,9 @@ def save_data(data, filename):
 
 @app.route('/store_balance_sheet', methods=['POST'])
 def store_balance_sheet():
+
+    print('HEREEEE')
+
     try:
         # Parse JSON from request
         form_data = request.get_json()
@@ -44,7 +52,7 @@ def store_balance_sheet():
         save_status = save_data(form_data, filename)
         if save_status is not True:
             return jsonify({"error": save_status}), 500
-
+        print("Success")
         return jsonify({"message": f"Balance sheet stored successfully as {filename}"}), 200
     
     except Exception as e:

@@ -53,8 +53,10 @@ function BalanceSheet() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Submitting form data:", formData); // Debugging
+
     try {
-      const response = await fetch("/store_balance_sheet", {
+      const response = await fetch("http://127.0.0.1:5000/store_balance_sheet", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,11 +64,13 @@ function BalanceSheet() {
         body: JSON.stringify(formData),
       });
 
+      console.log("Server Response:", response.status); // Debugging
+
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
 
-      window.location.href = "/income-statement";
+      window.location.href = "/Income_Statement"; // Redirect to Income Statement page
     } catch (err) {
       console.error(err);
       setError("Failed to save balance sheet data");
