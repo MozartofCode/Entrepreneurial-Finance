@@ -5,15 +5,29 @@ import { useState } from "react";
 
 function BalanceSheet() {
   const [formData, setFormData] = useState({
-    cash: "",
-    accountsReceivable: "",
-    inventory: "",
-    fixedAssets: "",
-    accountsPayable: "",
-    shortTermDebt: "",
+    
+    companyName: "",
+    year: "",
+    
+    cashAndMarketableSecurities: "",
+    receivables: "",
+    inventories: "",
+    grossEquipment: "",
+    accumulatedDepreciation: "",
+    netEquipment: "",
+    otherLongTermAssets: "",
+    totalAssets: "",
+
+    payables: "",
+    accruedWages: "",
+    bankLoans: "",
+    otherCurrentLiabilities: "",
+    totalCurrentLiabilities: "",
     longTermDebt: "",
-    commonStock: "",
-    retainedEarnings: "",
+    capitalLeases: "",
+    totalLongTermLiabilities: "",
+    ownersequity: "",
+    totalLiabilitiesAndEquity: "",
   });
 
   const [error, setError] = useState(null);

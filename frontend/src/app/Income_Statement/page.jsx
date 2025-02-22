@@ -5,12 +5,22 @@ import { useState } from "react";
 
 function IncomeStatement() {
   const [formData, setFormData] = useState({
-    salesRevenue: "",
-    otherRevenue: "",
+    
+    companyName: "",
+    year: "",
+    
+    netSales: "",
     costOfGoodsSold: "",
-    operatingExpenses: "",
-    interestExpense: "",
-    taxExpense: "",
+    grossEarnings: "",
+    marketingExpenses: "",
+    administrativeExpenses: "",
+    buildingRental: "",
+    depreciationExpense: "",
+    EBIT: "",
+    interest: "",
+    earningsBeforeTaxes: "",
+    taxes: "",
+    netIncome: "",
   });
 
   const handleChange = (e) => {

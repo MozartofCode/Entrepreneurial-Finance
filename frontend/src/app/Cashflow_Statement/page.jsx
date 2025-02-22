@@ -4,18 +4,31 @@ import { useState } from "react";
 
 function Cashflow() {
   const [formData, setFormData] = useState({
-    operatingActivities: {
-      cashFromOperations: "",
-      workingCapitalChanges: "",
+
+    companyName: "",
+    year: "",
+
+    cashflowFromOperations: {
+      netIncome: "",
+      depreciation: "",
+      increaseInReceivables: "",
+      increaseInInventory: "",
+      increaseInPayables: "",
+      increaseInAccruedWages: "",
+      netCashflowFromOperations: "",
     },
-    investingActivities: {
-      capitalExpenditures: "",
-      investmentActivity: "",
+    
+    cashflowFromInvestingActivities: {
+      increaseInGrossEquipment: "",
     },
-    financingActivities: {
-      debtActivity: "",
-      equityActivity: "",
+
+    cashflowFromFinancingActivities: {
+      increaseInOtherShortTermLiabilities: "",
+      netChangeExcludingCashAccounts: "",
+      beginningCash: "",
+      endingCash: "",
     },
+
   });
 
   const [error, setError] = useState(null);
